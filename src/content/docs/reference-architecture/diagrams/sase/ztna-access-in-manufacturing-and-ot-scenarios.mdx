@@ -1,0 +1,76 @@
+---
+title: ZTNA Access in Manufacturing and OT scenarios
+pcx_content_type: reference-architecture-diagram
+products:
+  - Access
+  - Gateway
+  - Magic WAN
+sidebar:
+  order: 1
+  label: ZTNA Access in Manufacturing and OT scenarios
+updated: 2025-01-10
+---
+
+## Introduction
+Secure access to protected resources is a common scenario in any SASE/ZT architecture. In most cases, users need to reach software applications and services that reside in various locations such as on-premises datacenters, IaaS or PaaS environments or managed SaaS solutions. Frequently, these are web-based applications or web APIs that users interact with using a standard browser or a mobile application.
+
+In manufacturing and OT scenarios this is not always the case. For example, users need secure access to machinery deployed on a production line. Physical apparatuses often do not support standard web protocols, and may use proprietary or other lower level communication protocols based on TCP and UDP.
+
+Traditionally, access to these systems is provided by deploying a classic VPN solution. This can mean a VPN concentrator in each of the manufacturing plants, or a VPN concentrator in a core data center to which users connect, and which then fans out the traffic to each respective remote location using dedicated connectivity such as MPLS or other P2P VPN tunnels. 
+
+In this scenario, users are required to install one or more client applications on their devices, enabling the connection to the VPN. In cases where a VPN is not available, users must phisically travel to the productive sites/manufacturing plants and obtain direct physical access to the hardware/machinery.
+
+In most cases, the productive environments and plants are segregated from the internet, to minimize security risks. Some hardware and appliances may require periodic connectivity in order to retrieve updated firmware images and software updates.
+
+### Challenges
+
+In the scenario described earlier, there are several challenges that are hard to tackle when using a traditional approach:
+
+* Many companies use external partners and contractors for 24/7 mainteinance and tuning requirements. Often, these users cannot install third party clients (such as the VPN client). When they can, it is unlikely that the device being used is controlled by appropriate device posture rules or covered by the endpoint protection solutions of the manufacturing company.
+* Some manufacturing companies provide dedicated devices to such third parties in order to access their plants. This represents not only an extra cost and mainteinance burden, but can also introduce security concerns if proper segmentation is not implemented.
+* When a manufacturing plant has many productive sites and remote offices, it becomes cumbersome to deploy a secure gateway solution in each of the locations. This means that access from the plant to the Internet (when required) is not uniformly covered, or requires backhauling first all the traffic to a central location where such controls are implemented. This can degrade performance and increase costs.
+* When a new productive site is added to the perimeter, it requires a significant effort to implement and deploy the remote access and protection. 
+
+To summarise, traditional approaches can hinder the deployment speed, increase costs - including those related to ongoing mainteinance requirements.
+
+## Solution
+
+Thanks to its extensive global, programmable network, Cloudflare is able to cover the above requirements in a flexible, secure and performant way. Let's review in detail each respective scenario and how Cloudflare can help manufacturing and all companies operating in the OT space.
+
+### Provide remote access to plants
+
+#### Access for contractors / partners
+
+Consider a scenario where third parties (such as contractors and partners) require access to the productive site of your company. For example, to perform mainteinance and configuration on the machinery, or to carry out remote CCTV duties.
+
+TODO: ADD DIAGRAM 1
+
+You can expose the control interface, assuming initially that it is web-based for simplicity, using a simple software connector (Cloudflare Tunnel) that can run as a lightweight service in your private network. It connects your environment to Cloudflare. On Cloudflare, using Access you can create an application and attach appropriate access policies to allow your contractors and partners to reach it. 
+
+As this is a web application, all the interaction happens in a standard browser. You can integrate one or more authentication providers, use the native Cloudflare OTP method, and include other contextual checks such as the IP or IP range from which your control interface is accessed, or the source country of the traffic.
+
+Your scenario may also require protocols other than HTTP(s). For example, a contractor may need to access a CCTV camera inside a factory using the RTSP protocol. Or they may need to control machinery which uses a thick-client with its own TCP based protocol. In such scenarios, using the same software connector already mentioned (Cloudflare Tunnel), it is possible to expose a single IP or IP subnet from your private network to the contractor. The contractor will need to install a  client (WARP Client) and then enroll into your organization, using an authentication provider or OTP as before.
+
+TODO: ADD DIAGRAM 2
+
+#### Access for employees
+
+The access model for employees is exactly the same as what is adopted for contractor and partners. The only difference is the level of control that you, as the IT Administrator of your company, can include on the employee devices. For example. the access policies can now include Device Posture signals (from the WARP Client, or from third party providers that can be integrated)
+
+TODO: ADD DIAGRAM 3
+
+### Secure internet access from plants
+
+To secure outbound traffic from the manufacturing plants to the outside world, a Secure Web Gateway can be easily deployed. Unlike traditional, hardware based solutions, Cloudflare Gateway can leverage existing local Internet connectivity to connect your plant to the nearest Cloudflare datacenter, and enforce the traffic inspection policies that are required to secure your environment. 
+
+TODO: ADD DIAGRAM 4
+
+The solution adapts with your requirements if you network architecture has more complexity or constraints. For example, you may have several plants without a local internet breakout. These plants may be connected to a central datacenter using P2P VPN lines or other dedicated (MPLS) solutions. In that case, you can implement the Cloudflare Gateway in your central datacenter, so that all internal traffic that is routed outside of your network from there is inspected and assessed for potential issues.
+
+TODO: ADD DIAGRAM 5 
+
+## Conclusions
+TODO
+
+## Related resources
+TODO
