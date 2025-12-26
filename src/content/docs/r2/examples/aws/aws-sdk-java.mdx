@@ -5,22 +5,10 @@ pcx_content_type: example
 
 import { Render } from "~/components";
 
-<Render file="keys" />
+<Render file="keys" product="r2" />
 <br />
 
 This example uses version 2 of the [aws-sdk-java](https://github.com/aws/aws-sdk-java-v2/#using-the-sdk) package. You must pass in the R2 configuration credentials when instantiating your `S3` service client:
-
-:::note[Compatibility]
-Client version `2.30.0` introduced a modification to the default checksum behavior from the client that is currently incompatible with R2 APIs.
-
-To mitigate, users can use `2.29.52` or add the following to their S3Config:
-
-```java
-this.requestChecksumCalculation = "when_required",
-this.responseChecksumValidation = "when_required"
-```
-
-:::
 
 ```java
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -47,6 +35,9 @@ public class CloudflareR2Client {
 
     /**
      * Configuration class for R2 credentials and endpoint
+     * - accountId: Your Cloudflare account ID
+     * - accessKey: Your R2 Access Key ID (see: https://developers.cloudflare.com/r2/api/tokens)
+     * - secretKey: Your R2 Secret Access Key (see: https://developers.cloudflare.com/r2/api/tokens)
      */
     public static class S3Config {
         private final String accountId;
@@ -82,7 +73,7 @@ public class CloudflareR2Client {
         return S3Client.builder()
             .endpointOverride(URI.create(config.getEndpoint()))
             .credentialsProvider(StaticCredentialsProvider.create(credentials))
-            .region(Region.of("auto"))
+            .region(Region.of("auto")) // Required by SDK but not used by R2
             .serviceConfiguration(serviceConfiguration)
             .build();
     }
@@ -115,9 +106,9 @@ public class CloudflareR2Client {
 
     public static void main(String[] args) {
         S3Config config = new S3Config(
-            "your_account_id",
-            "your_access_key",
-            "your_secret_key"
+            "<ACCOUNT_ID>",
+            "<ACCESS_KEY_ID>",
+            "<SECRET_ACCESS_KEY>"
         );
 
         CloudflareR2Client r2Client = new CloudflareR2Client(config);
@@ -177,7 +168,7 @@ public class CloudflareR2Client {
         return S3Presigner.builder()
             .endpointOverride(URI.create(config.getEndpoint()))
             .credentialsProvider(StaticCredentialsProvider.create(credentials))
-            .region(Region.of("auto"))
+            .region(Region.of("auto")) // Required by SDK but not used by R2
             .serviceConfiguration(S3Configuration.builder()
                 .pathStyleAccessEnabled(true)
                 .build())
