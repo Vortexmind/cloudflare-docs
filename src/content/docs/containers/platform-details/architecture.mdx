@@ -22,7 +22,7 @@ This allows you to gracefully shutdown any running instances during a rollout. R
 Recall that Containers are backed by [Durable Objects](/durable-objects/) and [Workers](/workers/).
 Requests are first routed through a Worker, which is generally handled
 by a datacenter in a location with the best latency between itself and the requesting user.
-A different datacenter may be selected to optimize overall latency, if [Smart Placement](/workers/configuration/smart-placement/)
+A different datacenter may be selected to optimize overall latency, if [Smart Placement](/workers/configuration/placement/)
 is on, or if the nearest location is under heavy load.
 
 Because all Container requests are passed through a Worker, end-users cannot make non-HTTP TCP or
@@ -31,7 +31,7 @@ or UDP from an end-user, please [let us know](https://forms.gle/AGSq54VvUje6kmKu
 
 ### Worker to Durable Object
 
-From the Worker, a request passes through a Durable Object instance (the [Container package](/containers/container-package) extends a Durable Object class).
+From the Worker, a request passes through a Durable Object instance (the [Container class](/containers/container-class/) extends a Durable Object class).
 Each Durable Object instance is a globally routable isolate that can execute code and store state. This allows
 developers to easily address and route to specific container instances (no matter where they are placed),
 define and run hooks on container status changes, execute recurring checks on the instance, and store persistent

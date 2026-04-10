@@ -129,7 +129,7 @@ Refer to [Maximum transmission unit and maximum segment size](/magic-transit/ref
 	<AnchorHeading title="Configure tunnels" depth={2} />
 	<a href="/magic-transit/how-to/configure-tunnel-endpoints/">Configure the tunnels</a> on both the Cloudflare side and your router side to connect to your origin infrastructure.
 
-	<AnchorHeading title="Configure static routes or BGP peering" depth={2} />
+	<AnchorHeading title="Configure static routes or BGP peering (beta)" depth={2} />
 	<p>Configure <a href="/magic-transit/how-to/configure-routes/#configure-static-routes">static routes</a> or <a href="/magic-transit/how-to/configure-routes/#configure-bgp-routes">BGP peering</a> to route traffic from Cloudflare's global network to your locations.</p>
 
 	<AnchorHeading title="Run pre-flight checks" depth={2} />
@@ -145,6 +145,14 @@ Refer to [Maximum transmission unit and maximum segment size](/magic-transit/ref
 
 	<AnchorHeading title="Advertise prefixes" depth={2} />
 	<Render file="magic-transit/advertise-prefixes"	product="networking-services" />
+
+	<AnchorHeading title="Next steps" depth={2} />
+	<Markdown text={`
+After your prefixes are advertised, configure your DDoS protection settings:
+
+1. Review and customize your [DDoS protection](/magic-transit/ddos/) settings, including [network-layer DDoS managed rulesets](/ddos-protection/managed-rulesets/network/).
+2. If your network handles TCP traffic, enable [Advanced TCP Protection](/ddos-protection/advanced-ddos-systems/overview/advanced-tcp-protection/). If your network receives DNS over UDP traffic, enable [Advanced DNS Protection](/ddos-protection/advanced-ddos-systems/overview/advanced-dns-protection/). These systems provide stateful analysis beyond the managed rulesets.
+	`} inline={false} />
 
   </>
   )

@@ -4,9 +4,7 @@ params:
   - protocol
 ---
 
-By default, Cloudflare will evaluate Access application policies after evaluating all [Gateway Network policies](/cloudflare-one/traffic-policies/network-policies/). If you have not configured Gateway Network policies, refer to [Get started with network filtering](/cloudflare-one/traffic-policies/initial-setup/network/).
-
-To evaluate Access applications before or after specific Gateway policies:
+By default, Cloudflare will evaluate Access application policies after evaluating all [Gateway network policies](/cloudflare-one/traffic-policies/network-policies/). To evaluate Access applications before or after specific Gateway policies:
 
 <ol>
 <li>
@@ -18,7 +16,7 @@ In [Cloudflare One](https://one.dash.cloudflare.com/), go to **Traffic policies*
 
 </li>
 
-{ props.protocol === "rdp" && (<> <li> Ensure that <strong>Enforce WARP client session duration</strong> is turned off, otherwise users will be blocked from accessing RDP targets. </li> </>)}
+{ props.protocol === "rdp" && (<> <li> Ensure that <strong>Enforce Cloudflare One Client session duration</strong> is turned off, otherwise users will be blocked from accessing RDP targets. </li> </>)}
 
 <li>
 	Update the policy's [order of
