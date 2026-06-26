@@ -1,8 +1,11 @@
 ---
 pcx_content_type: how-to
 title: /content - Fetch HTML
+description: Capture fully rendered HTML from a webpage after JavaScript execution using the Browser Run /content endpoint.
 sidebar:
   order: 2
+products:
+  - browser-run
 ---
 
 import { Tabs, TabItem, Render } from "~/components";
@@ -59,6 +62,22 @@ const content = await client.browserRendering.content.create({
 });
 
 console.log(content);
+```
+
+</TabItem> <TabItem label="Workers binding">
+
+```typescript
+interface Env {
+	BROWSER: BrowserRun;
+}
+
+export default {
+	async fetch(request, env): Promise<Response> {
+		return await env.BROWSER.quickAction("content", {
+			url: "https://developers.cloudflare.com/",
+		});
+	},
+} satisfies ExportedHandler<Env>;
 ```
 
 </TabItem> </Tabs>

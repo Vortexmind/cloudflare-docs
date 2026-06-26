@@ -78,7 +78,7 @@ Configuration steps vary depending on your [device on-ramp](#device-connectivity
 
 <Details header="Cloudflare WAN">
 
-1. Ensure that the <GlossaryTooltip term="initial resolved IP">initial resolved IP</GlossaryTooltip> listed above [route through Cloudflare WAN](/cloudflare-wan/configuration/manually/how-to/configure-routes/) to Cloudflare.
+1. Ensure that the <GlossaryTooltip term="initial resolved IP">initial resolved IP</GlossaryTooltip> listed above [route through Cloudflare WAN](/cloudflare-wan/configuration/how-to/configure-routes/) to Cloudflare.
 2. [Point the DNS resolver](/cloudflare-wan/zero-trust/cloudflare-gateway/#dns-filtering) for your Cloudflare WAN network to Cloudflare Gateway.
 
 </Details>
@@ -87,14 +87,16 @@ Configuration steps vary depending on your [device on-ramp](#device-connectivity
 
 <Render file="tunnel/create-tunnel" product="cloudflare-one" />
 
-9. In the **Hostname routes** tab, enter the fully qualified domain name (FQDN) that represents your application (for example, `wiki.internal.local`).
+8. After the tunnel is connected, go to the tunnel's **Routes** tab and select **Add route**, then select **Private hostname**.
+
+9. Enter the fully qualified domain name (FQDN) that represents your application (for example, `wiki.internal.local`).
 
    <Render
    	file="tunnel/hostname-format-restrictions"
    	product="cloudflare-one"
    />
 
-10. Select **Complete setup**.
+10. Select **Save**.
 
 ### 2. Configure DNS resolution
 

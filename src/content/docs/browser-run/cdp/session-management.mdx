@@ -4,13 +4,15 @@ title: Session management (HTTP)
 description: Manage browser sessions and tabs using HTTP endpoints, including creating sessions, listing targets, and opening the Chrome DevTools UI.
 sidebar:
   order: 1
+products:
+  - browser-run
 ---
 
 import { CURL, Render } from "~/components";
 
 Use the HTTP API to manage browser sessions and tabs without using WebSocket connections. This is useful for session lifecycle operations like creating sessions, listing tabs, and cleaning up resources.
 
-<Render file="rest-api-token-permissions" product="browser-run" />
+<Render file="cdp-api-token-permissions" product="browser-run" />
 
 The [API reference](/api/resources/browser_rendering/) documents all session management endpoints under `/devtools`.
 

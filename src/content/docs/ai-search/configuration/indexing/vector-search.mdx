@@ -1,17 +1,18 @@
 ---
 title: Vector search
+description: Configure vector search in AI Search to find semantically similar content using embeddings.
 pcx_content_type: concept
 sidebar:
   order: 2
+products:
+  - ai-search
 ---
 
 Vector search converts your query into a vector embedding and finds chunks with similar meaning. It is enabled by default on all AI Search instances. For an overview of search modes, refer to [Search modes](/ai-search/concepts/search-modes/).
 
 ## Built-in vector index
 
-Instances created after **April 16, 2026** include a built-in vector index powered by [Vectorize](/vectorize/). The vector index stores embeddings generated from your content and is created and maintained automatically. You do not need to create or manage a Vectorize index yourself.
-
-Instances created before this date use a Vectorize index provisioned on your account. These instances are billed separately for Vectorize usage. All instances will be migrated to managed infrastructure. Migration details are coming soon.
+AI Search instances include a built-in vector index powered by [Vectorize](/vectorize/). The vector index stores embeddings generated from your content and is created and maintained automatically. You do not need to create or manage a Vectorize index yourself.
 
 ## Embedding model
 
